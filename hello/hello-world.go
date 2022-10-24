@@ -4,7 +4,10 @@
 
 package main
 
-import "fmt"
+import {
+	"fmt"
+	"math"
+}
 
 func main() {
 	// substrings can be added together with '+'
@@ -13,8 +16,11 @@ func main() {
 	// fairly standard integers, floats, and booleans.
 	fmt.Println("6+9 =", 6+9)
 	fmt.Println("8.0/4.0 =", 8.0/4.0)
-
-	fmt.Println(true && false)
 	fmt.Println(true || false)
-	fmt.Println(!true)
+
+	// variables, I guess no more `let`
+	var a = "initial"
+	f := "apple" // `:=` is shorthand for var
+	var b, c int = 1, 2
+	var e int // defaults to 0
 }
