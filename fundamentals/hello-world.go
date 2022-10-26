@@ -1,3 +1,10 @@
+// install go on linux w/ https://go.dev/doc/install
+
+// if perm issue during install:
+// `# sudo mkdir /usr/local/go && sudo chown local:local /usr/local/go/`
+// then after install `# sudo chown -R local:local /usr/local/go/*`
+//
+
 // https://gobyexample.com/hello-world
 // use `go run` to run a program
 // use `go build` to build the binary
