@@ -1,53 +1,31 @@
 /**
-* https://gophercises.com/#signup
-* https://github.com/gophercises/quiz
-* https://gobyexample.com/
+- References
+	https://gophercises.com/#signup
+	https://github.com/gophercises/quiz
+	https://gobyexample.com/
 
-* Plugins
-	* encodig/csv
+- Part 1 (Basic)
+	- [x] read data from problems.csv by default and add [flag -fp] to change input file
+	- [x] manipulate data into seperate questions and associated answers
+	- [x] ask user questions and track only if they were correct
+		- if answer == correct --> counter++ ...then next question
+		- if answer != correct --> ...next question
+		- if answer == nil --> ...next question
+	- [x] at the end output score of # of correct/# of questions
 
-* Plan
-	* NOTE: CSV files may have questions with commas in them.
-	* Eg: "what 2+2, sir?",4 is a valid row in a CSV.
-	* I suggest you look into the CSV package in Go and don't try to write your own CSV parser.
-		* * finished importing "encoding/csv" package
+- Part 2 (Advanced)
+	- [ ] ask user to press enter to start a 30 second quiz by default and add [flag -t] to change time limit
+			how does calling timer() from main() and having it change a global flag after n seconds
+			that would in turn flip an if-else in the for-loop?
+			although, that might not kick the user if they're mid-question
+			OMG, GO ROUTINES AND CHANNELS!!!
+	- [ ] stop quiz immediately even if mid-question as soon as time limit is reached
 
-	* The CSV file should default to problems.csv
-	* But the user should be able to customize the filename via a flag.
-		* *  oh okay so just a "golang command-line flag w/ default of problems.csv"
-	* Create a program that will read in a quiz provided via a CSV file
-		* * done, got CSV Parsing with cli flags implemented
-
-	* And will then give the quiz to a user
-		* TODO: we'll need to take csv output and manipulate it somehow
-	* Regardless of whether the answer is correct or wrong the next question should be asked immediately afterwards.
-		* * this sounds like a dumb "for loop"
-		* TODO: hmm okay i'll get to it
-	* You can assume that quizzes will be relatively short (< 100 questions)
-		* * ok so definitely a "for loop"
-		* * and we don't need optimizations like "reading csv line by line on demand" with an input so small
-
-	* And will have single word/number answers.
-		* * not sure what to do with this
-		* ! m := make(map[string]int)
-		* ! this will be a problem ^ so we probably cant use "maps"
-		* TODO: wait how do we prompt? with promptui library?
-
-	* While, keeping track of how many questions they get right and how many they get incorrect.
-	* At the end of the quiz the program should output the total number of questions
-	* correct and how many questions there were in total.
-	* Questions given invalid answers are considered incorrect.
-
-
-	Part 1:
-	format: problem, answer
-	read problems.csv file by default - let user customize filename via flag
-
-	ask question and prompt for an answer
-	start next answer immediatley after
-
-	keep track of how many questions were correct or incorrect
-	at the end of the quiz output: correct answers/total questions
+- Part 3 (Bonus)
+	- [ ] sanatize user inputs with 'strings' package
+	- add [flag -s] to shuffle questions around every run
+	- use golang library 'cobra' to display real-time countdown while quiz is running
+	- create unit tests for exercise
 */
 
 // package name can be an arbitrary name unless it's an entrypoint for your program
@@ -63,7 +41,7 @@ import (
 	"strings"
 )
 
-// helper for streamlining error checks during dev
+// helper for streamlining error checks during dev?
 func check(e error) {
 	if e != nil {
 		panic(e)
@@ -72,7 +50,7 @@ func check(e error) {
 
 // used top answer for parsing data - https://stackoverflow.com/questions/24999079/reading-csv-file-in-go
 // understanding output - https://www.dotnetperls.com/csv-go
-func read_csv(fp string) [][]string {
+func read(fp string) [][]string {
 	// fp = file path, f = file, err = error, rec = record
 	// load a csv file
 	f, err := os.Open(fp)
@@ -108,24 +86,27 @@ func ask(question string) string {
 	return strings.TrimSpace(answer)
 }
 
+func timer() {
+
+}
+
 // program entry point - must be main
 func main() {
 	counter := 0
-	// fp = file path, out = output
-	fp := flag.String("i", "problems.csv", "Selects a file from which the problems for the quiz are read. A different file can be set with it's relative or absolute path")
-
+	// fp = file path, csv_out = csv output
+	fp := flag.String("fp", "problems.csv", "Uses relative or absolute file path to select a file with problems for the quiz read.")
 	flag.Parse()
 	// outputs 2d slice (a slice of slices)
-	out := read_csv(*fp)
+	csv_out := read(*fp)
 	//// fmt.Printf("%v lines | %s \n", len(output), output)
 
 	// https://gobyexample.com/slices
 	// https://www.dotnetperls.com/csv-go
 	// ln = line number, l = line, qn = question, ans = answer, in = input
-	for ln := range out {
-		line := out[ln]     // [[5+5 10] [1+2 2]] -> [5+5 10]
-		question := line[0] // [5+5 10] -> 5+5
-		ans := line[1]      // [5+5 10] -> 10
+	for line_num := range csv_out {
+		line := csv_out[line_num] // [[5+5 10] [1+2 2]] -> [5+5 10]
+		question := line[0]       // [5+5 10] -> 5+5
+		ans := line[1]            // [5+5 10] -> 10
 
 		input := ask(question)
 		if ans == input {
@@ -137,5 +118,5 @@ func main() {
 		//// 	fmt.Printf("expected: %s | input: %s | result: false \n", answer, input)
 		//// }
 	}
-	fmt.Printf("You've reached the end of the quiz, you got %v out of %v questions correct", counter, len(out))
+	fmt.Printf("You've reached the end of the quiz, you got %v out of %v questions correct", counter, len(csv_out))
 }
