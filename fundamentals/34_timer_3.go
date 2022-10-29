@@ -35,7 +35,7 @@ func timer(wg *sync.WaitGroup, t int) {
 	// define method AfterFunc() with it's input parameter set
 	time.AfterFunc(time.Duration(t)*time.Second, func() {
 		// print out statement to confirm func was called
-		fmt.Printf("func called after %v \n", t)
+		fmt.Printf("func called after %vs \n", t)
 		// channel <- "idk"
 		wg.Done()
 	})
