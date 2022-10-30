@@ -16,16 +16,17 @@
 - Part 2 (Advanced)
 	- [x] ask user to press enter to start a 30 second quiz by default and add [flag -t] to change time limit
 	- [x] stop quiz immediately even if mid-question as soon as time limit is reached
-		how does calling timer() from main() and having it change a global flag after n seconds
-		that would in turn flip an if-else in the for-loop?
-		although, that might not kick the user if they're mid-question
-		OMG, GO ROUTINES AND CHANNELS!!!
+		how about initializing timer() from main() and having it change a global flag after n seconds that would in turn flip an if-else after n seconds in loop(csv_out)
+		although, i don't see how this could kick the user if they're in the middle of ask()
+		OMG, GO ROUTINES AND CHANNELS!!! (and apparently an os.Exit() too lol)
 
 - Part 3 (Bonus)
-	- [ ] sanatize user inputs with 'strings' package
-	- add [flag -s] to shuffle questions around every run
-	- use golang library 'cobra' to display real-time countdown while quiz is running
-	- create unit tests for exercise
+	- [x] sanatize user inputs (whitespace & caps) with 'strings' package
+	- [x] add [flag -s] to shuffle questions around every run
+////- [ ] create unit tests for exercise
+////- [ ] use golang library 'cobra' to display real-time countdown while quiz is running
+////	- display countdown off to the side
+////	- use colors in prompt
 */
 
 // package name can be an arbitrary name unless it's an entrypoint for your program
@@ -37,6 +38,7 @@ import (
 	"encoding/csv"
 	"flag"
 	"fmt"
+	"math/rand"
 	"os"
 	"strconv"
 	"strings"
@@ -46,7 +48,7 @@ import (
 
 // used top answer for parsing data - https://stackoverflow.com/questions/24999079/reading-csv-file-in-go
 // understanding output - https://www.dotnetperls.com/csv-go
-func read(file_path string) [][]string {
+func read(file_path string, shuffle bool) [][]string {
 	// fp = file path, f = file, err = error, res = result
 	// load a csv file
 	file, err := os.Open(file_path)
@@ -66,6 +68,15 @@ func read(file_path string) [][]string {
 		fmt.Println(err.Error())
 	}
 
+	// https://golang.cafe/blog/how-to-shuffle-a-slice-in-go.html
+	// shuffle data if [flag -s] is true
+	if shuffle {
+		rand.Seed(time.Now().Unix())
+		rand.Shuffle(len(result), func(i, j int) {
+			result[i], result[j] = result[j], result[i]
+		})
+	}
+
 	return result
 }
 
@@ -79,7 +90,9 @@ func ask(question string) string {
 		err := fmt.Errorf("an error occured while reading input %v", err)
 		fmt.Println(err.Error())
 	}
-	return strings.TrimSpace(answer)
+	answer = strings.TrimSpace(answer)
+	answer = strings.ToLower(answer)
+	return answer
 }
 
 // channel chan<- string,
@@ -87,10 +100,8 @@ func timer(wg *sync.WaitGroup, duration int, correct_answer_counter chan string,
 	// t = time, channel = # of correct answer, total = # of total questions,
 	// convert flag -t's int output to something time.AfterFunc() can understand and define method AfterFunc() with it's input parameter set
 	time.AfterFunc(time.Duration(duration)*time.Second, func() {
-		// print out statement to confirm func was called
-		fmt.Printf("\nfunc called after %vs \n", duration)
-		// this is kind of yucky but... runs the following when user doesn't finish before timer ends
-		fmt.Printf("It's been %vs and you've run out of time, you managed to get %v out of %v questions correct \n", duration, <-correct_answer_counter, total_num_of_question)
+		// this is kind of yucky but... run the following when user doesn't finish before timer ends
+		fmt.Printf("\nIt's been %vs and you've run out of time, you managed to get %v out of %v questions correct \n", duration, <-correct_answer_counter, total_num_of_question)
 		wg.Done()
 		os.Exit(0)
 	})
@@ -99,22 +110,22 @@ func timer(wg *sync.WaitGroup, duration int, correct_answer_counter chan string,
 // program entry point - must be main
 func main() {
 	// initialize cli flags
-	// fp = file path, csv_out = csv output
+	// fp = file path, t = time, s = shuffle
 	fp := flag.String("fp", "problems.csv", "Uses relative or absolute file path to select a file with problems for the quiz read.")
-	t := flag.Int("t", 30, "Sets the timer's duration in seconds.")
+	t := flag.Int("t", 30, "Set the timer's duration in seconds.")
+	s := flag.Bool("s", false, "Shuffle the order of problems around every time the quiz is run.")
 	flag.Parse()
+
 	// create waitgroup for goroutine timer()
 	wg := new(sync.WaitGroup)
 	wg.Add(1)
 	// create buffered channel because... i forgot :skull:
 	channel := make(chan string, 1)
 	channel <- "0"
-
 	// call functions
 	ask("press <enter> to start timer and begin quiz")
 	counter := 0
-	csv_out := read(*fp) // outputs 2d slice (a slice of slices)
-	//// fmt.Printf("%v lines | %s \n", len(output), output)
+	csv_out := read(*fp, *s) // read data file and output 2d slice
 	go timer(wg, *t, channel, len(csv_out))
 
 	// https://gobyexample.com/slices
@@ -130,14 +141,15 @@ func main() {
 		input := ask(question)
 		if answer == input {
 			counter++
-			fmt.Printf("expected: %s | input: %s | result: correct \n", answer, input)
+			// fmt.Printf("expected: %s | input: %s | result: correct \n", answer, input)
 		} else {
-			fmt.Printf("expected: %s | input: %s | result: incorrect \n", answer, input)
+			// fmt.Printf("expected: %s | input: %s | result: incorrect \n", answer, input)
 		}
 
 		// run below `counter++` and ask() so that when user's mid-question and timer() uses os.Exit()
 		// counter remains same as before whichever question user was in the middle of
-		// explicitly empty channel before sending new data
+		// explicitly drain channel before sending new data through
+		// ! generally a very bad idea, but i think it'll be fine here.
 		<-channel
 		channel <- strconv.Itoa(counter)
 	}

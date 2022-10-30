@@ -10,6 +10,10 @@
 // go - Golang testing: "no test files" - Stack Overflow
 // https://stackoverflow.com/questions/28240489/golang-testing-no-test-files
 
+// ! oh dear, I think I was supposed to write unit tests while doing my code
+// ! not after i'm done most of it - i'll do it for my next exercise then
+// ! and especially for that personal project i've been cooking up
+
 // TODO: there's 3* types?
 // unbuffered...
 // buffered...
