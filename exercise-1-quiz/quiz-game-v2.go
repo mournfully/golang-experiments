@@ -1,4 +1,4 @@
-// updated version of my personal answer now that I've seen the proper solutions
+// a rewrite of my my solution now that I've seen the solutions provided by the exercise
 
 package main
 

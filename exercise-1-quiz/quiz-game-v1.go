@@ -1,4 +1,6 @@
-/**
+// my solution without looking at any solutions provided by exercise
+
+/*
 - References
 	https://gophercises.com/#signup
 	https://github.com/gophercises/quiz
