@@ -1,4 +1,4 @@
-You can find the relevant example at `../../exercise-2-urlshort/`
+~~You can find the relevant example at `../../exercise-2-urlshort/`~~
 
 ---
 
