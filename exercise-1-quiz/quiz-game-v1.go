@@ -1,3 +1,5 @@
+//go:build exclude
+
 // my solution without looking at any solutions provided by exercise
 
 /*

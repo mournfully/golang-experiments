@@ -1,4 +1,7 @@
 /*
+	final example can be found in ../../exercise-2-urlshort/urlshort-v2.go
+	basically use filepath.Ext() method instead
+
 	trying to make a flag input agnostic might not be such a bright idea - i'll just have different flags for different input types
 
 	go run find_file_type_2.go <file-path>

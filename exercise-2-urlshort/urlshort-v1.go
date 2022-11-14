@@ -1,3 +1,5 @@
+//go:build exclude
+
 /*
 	ptman/urlredir: Educational URL redirector service in Go
 	https://github.com/ptman/urlredir
