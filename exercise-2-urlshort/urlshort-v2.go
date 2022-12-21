@@ -17,14 +17,17 @@ var (
 )
 
 func getFileBytes(inputFilePath string) []byte {
-	// open a file
+	// open file
 	file, err := os.Open(inputFilePath)
 	if err != nil {
 		fmt.Printf("failed to open file %q\n", inputFilePath)
 		panic(err)
 	}
 
-	// parse a file
+	// close file after function returns output
+	defer file.Close()
+
+	// parse file
 	buffer := new(bytes.Buffer)
 	_, err = buffer.ReadFrom(file)
 	if err != nil {
