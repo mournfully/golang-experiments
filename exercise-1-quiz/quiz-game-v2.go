@@ -1,5 +1,4 @@
 // a rewrite of my my solution now that I've seen the solutions provided by the exercise
-
 package main
 
 import (

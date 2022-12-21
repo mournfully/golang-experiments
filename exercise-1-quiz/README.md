@@ -1,13 +1,14 @@
 # Exercise #1, the quiz from GopherExercises
 
-### quiz-game-v1.go
-*Put simply, I decided to complete this exercise by myself without looking at the solutions provided. And to instead use `https://gobyexample.com/` for the absolute basics, and to search around for every problem I found. Admittedly, the complexity did grow more than it had to. Unfortunenatly, I didn't know any better at the time.*
+**quiz-game-v1.go**
+Put simply, I decided to complete this exercise by myself without looking at the solutions provided. And to instead use `https://gobyexample.com/` for the absolute basics, and to search around for every problem I found. Admittedly, the complexity did grow more than it had to. Unfortunenatly, I didn't know any better at the time.
 
-### quiz-game-v2.go
+*btw package name can be an arbitrary name unless it's an entrypoint for your program* [^1]
+
+**quiz-game-v2.go**
 *Afterwards, I looked at the provided solutions and made my own updated version but with a solid reference this time around.*
 
-
-
+**Tasks**
 - Part 1 (Basic)
 	- [x] read data from problems.csv by default and add [flag -fp] to change input file
 	- [x] manipulate data into seperate questions and associated answers
@@ -27,8 +28,13 @@
 - Part 3 (Bonus)
 	- [x] sanatize user inputs (whitespace & caps) with 'strings' package
 	- [x] add [flag -s] to shuffle questions around every run
+    - [ ] create unit tests for exercise
+    - [ ] use golang library 'cobra' to display real-time countdown while quiz is running
+    	- display countdown off to the side
+    	- use colors in prompt
 
 
-
-gophercises/quiz: Ex 1 - Run timed quizzes via the command line
-https://github.com/gophercises/quiz
+[^1]: [Error: package command-line-arguments is not a main package - Getting Help - Go Forum](https://forum.golangbridge.org/t/error-package-command-line-arguments-is-not-a-main-package/25851/4)
+[Gophercises - Coding exercises for budding gophers](https://gophercises.com/)
+[gophercises/quiz: Ex 1 - Run timed quizzes via the command line](https://github.com/gophercises/quiz)
+[Go by Example](https://gobyexample.com/)
