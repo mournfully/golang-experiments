@@ -1,11 +1,12 @@
 # Exercise #2, url-redirection from 
 
-I think I learnt something from spending all day today on this. Before I actually start coding, I should probably come up with a half-decent plan before I go off and do random crap that isn't even relevant .-.
-
+https://github.com/ptman/urlredir
 https://github.com/gophercises/urlshort/blob/master/students/dennisvis/main.go
 https://github.com/gophercises/urlshort/blob/master/students/dennisvis/urlshort/handler.go
 
 This time around, instead of banging my head against my keyboard when I get stuck. I decided to look at the solution briefley and then try and understand how they'd come to that conlclusion from the official documentation. I'm not sure if this is a better method...
+
+I think I learnt something from spending all day today on this. Before I actually start coding, I should probably come up with a half-decent plan before I go off and do random crap that isn't even relevant .-.
 
 **Tasks**
 - [x] url redirection, test with `go run main.go` and then on your browser go to `http://localhost:8080/` - was confused for a bit lol

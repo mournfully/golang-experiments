@@ -1,27 +1,5 @@
 //go:build exclude
 
-/*
-	ptman/urlredir: Educational URL redirector service in Go
-	https://github.com/ptman/urlredir
-
-	This time around, instead of banging my head against my keyboard when I get stuck. I decided to look at the solution briefley and then try and understand how they'd come to that conlclusion from the official documentation. I'm not sure if this is a better method...
-
-	- [x] url redirection
-	Test with `go run main.go` and then on your browser go to `http://localhost:8080/` - was confused for a bit lol
-
-	- [x] parse map pathsToUrls and redirect from entries there
-
-	- [x] create a cli flag to use yaml input file
-	- [x] parse from yaml file
-	- [x] convert data to a map
-	- [x] reuse maphandler() to parse map
-
-	- [ ] parse from json file
-	- [ ] read from database instead of map
-	- [ ] dockerize environment
-	- [ ] high availability redis database
-*/
-
 package main
 
 import (

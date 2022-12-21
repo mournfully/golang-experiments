@@ -2,12 +2,13 @@ package main
 
 import (
 	"bytes"
-	"exercise-2-urlshort/handlers"
 	"flag"
 	"fmt"
 	"net/http"
 	"os"
 	"path/filepath"
+
+	"example.com/handlers"
 )
 
 var (
