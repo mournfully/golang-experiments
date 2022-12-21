@@ -33,7 +33,7 @@ Put simply, I decided to complete this exercise by myself without looking at the
     	- display countdown off to the side
     	- use colors in prompt
 
-
+**References**
 [^1]: [Error: package command-line-arguments is not a main package - Getting Help - Go Forum](https://forum.golangbridge.org/t/error-package-command-line-arguments-is-not-a-main-package/25851/4)
 [Gophercises - Coding exercises for budding gophers](https://gophercises.com/)
 [gophercises/quiz: Ex 1 - Run timed quizzes via the command line](https://github.com/gophercises/quiz)
