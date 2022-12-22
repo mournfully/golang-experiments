@@ -16,7 +16,7 @@
     - [Parsing JSON files With Golang | TutorialEdge.net](https://tutorialedge.net/golang/parsing-json-with-golang/)
 
 - Part 2 (Advanced)
-  - [ ] Support cli, where stories are printed out to the terminal and options are picked via typing in numbers `Press 1 to venture ...`.
+  - [ ] Support `cli`, where stories are printed out to the terminal and options are picked via typing in numbers `Press 1 to venture ...`.
 
 - Part 3 (Bonus)
-  - [ ] Consider how you would alter your program in order to support stories starting form a story-defined arc. That is, what if all stories didn't start on an arc named intro? How would you redesign your program or restructure the JSON? This bonus exercises is meant to be as much of a thought exercise as an actual coding one.
+  - [ ] Consider how you would alter your program in order to support stories starting form a story-defined arc. That is, what if all stories didn't start on an arc named `intro`? How would you redesign your program or restructure the JSON? This bonus exercises is meant to be as much of a thought exercise as an actual coding one.
