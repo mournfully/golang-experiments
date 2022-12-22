@@ -31,9 +31,8 @@ func main() {
 		fmt.Printf("JsonDecoder: %s", err)
 	}
 
-	for k, c := range content {
-		c.Id += k
-		fmt.Printf("%# v\n", pretty.Formatter(c))
-		break
+	for id, content := range content {
+		content.Id += id
+		fmt.Printf("%# v\n", pretty.Formatter(content))
 	}
 }
