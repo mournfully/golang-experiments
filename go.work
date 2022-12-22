@@ -1,6 +1,3 @@
 go 1.19
 
-use (
-	./exercise-2-urlshort
-	./experiments/one_package_multiple_files
-)
+use ./exercise-3-cyoa
