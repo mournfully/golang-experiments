@@ -9,7 +9,11 @@
 - Part 1 (Basic)
   - [ ] Use the `html/template` package to create your HTML pages.
   - [ ] Create an `http.Handler` to handle the web requests instead of a handler function.
-  - [ ] Use the `encoding/json` package to decode the JSON file. 
+  - [x] Use the `encoding/json` package to decode the JSON file. 
+    - *even after looking through these, i cheated a bit and looked at the solution - but even now i don't get it .-.*
+    - [Parse JSON objects with arbitrary key names in Go using interfaces and type assertions](https://gist.github.com/mjohnsullivan/24647cae50928a34b5cc)
+    - [Parsing JSON with Go. How to unmarshal or decode JSON data… | by Sau Sheong | Go Recipes](https://go-recipes.dev/parsing-json-with-go-7268937a5f7b)
+    - [Parsing JSON files With Golang | TutorialEdge.net](https://tutorialedge.net/golang/parsing-json-with-golang/)
 
 - Part 2 (Advanced)
   - [ ] Support cli, where stories are printed out to the terminal and options are picked via typing in numbers `Press 1 to venture ...`.
