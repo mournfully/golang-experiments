@@ -3,34 +3,35 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"log"
 	"os"
 )
 
 func main() {
-	// Open file
-	file, err := os.Open("input.txt")
+	words, err := scanWords("input.txt")
 	if err != nil {
-		log.Fatal(err)
+		panic(err)
 	}
 
-	a := 0
-
-	// Scan the given file line by line
-	lineScanner := bufio.NewScanner(file)
-	for lineScanner.Scan() {
-		// Scan the given line word by word
-		wordScanner := bufio.NewScanner()
-		wordScanner.Split(bufio.ScanWords)
-
-		fmt.Println(wordScanner.Text())
-		fmt.Println(wordScanner.Text())
-
-		fmt.Println(lineScanner.Text())
-
-		a++
-		if a > 10 {
-			break
-		}
+	for _, word := range words {
+		fmt.Println(word)
 	}
+}
+
+func scanWords(path string) ([]string, error) {
+	file, err := os.Open(path)
+	if err != nil {
+		return nil, err
+	}
+
+	defer file.Close()
+
+	scanner := bufio.NewScanner(file)
+	scanner.Split(bufio.ScanWords)
+	var words []string
+
+	for scanner.Scan() {
+		words = append(words, scanner.Text())
+	}
+
+	return words, nil
 }
