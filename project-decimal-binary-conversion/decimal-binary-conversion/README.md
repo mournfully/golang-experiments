@@ -10,6 +10,9 @@ This table shows the decimal number `122` broken down into binary.
 *I ended up just reused my readFile() function all the way back from "exercise 1" lol*
 [Working with Files in Go | DevDungeon](https://www.devdungeon.com/content/working-files-go#seek)
 
+*As it turns `Table-Driven Tests` were all I needed to replace from ^ and I just wasted my day... again...*
+[How to Write Unit Test in Go. In this article, we are going to take a… | by Mert Kimyonşen | Delivery Hero Tech Hub | Medium](https://medium.com/yemeksepeti-teknoloji/how-to-write-unit-test-in-go-1df2b98ad510)
+
 ---
 
 ```go
