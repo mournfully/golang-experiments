@@ -1,6 +1,6 @@
 go 1.19
 
 use (
-	./exercise-2-urlshort
 	./exercise-3-cyoa
+	./experiments/testing
 )
