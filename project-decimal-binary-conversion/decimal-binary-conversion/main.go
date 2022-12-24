@@ -7,10 +7,10 @@ import (
 )
 
 func main() {
-	fmt.Println(Wrapper(934))
+	fmt.Println(wrapper(934))
 }
 
-func IntToBinary(n int) (output []int) {
+func intToBinary(n int) (output []int) {
 	// create array to store binary numbers
 	var binary []int
 
@@ -29,7 +29,7 @@ func IntToBinary(n int) (output []int) {
 	return output
 }
 
-func SliceToString(numbers []int) (out string) {
+func sliceToString(numbers []int) (out string) {
 	string := make([]string, len(numbers))
 	for i, v := range numbers {
 		string[i] = strconv.Itoa(v)
@@ -37,8 +37,8 @@ func SliceToString(numbers []int) (out string) {
 	return strings.Join(string, "")
 }
 
-func Wrapper(num int) (out string) {
-	slice := IntToBinary(num)
-	out = SliceToString(slice)
+func wrapper(num int) (out string) {
+	slice := intToBinary(num)
+	out = sliceToString(slice)
 	return
 }
