@@ -1,37 +1,44 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"os"
+	"strconv"
+	"strings"
 )
 
 func main() {
-	words, err := scanWords("input.txt")
-	if err != nil {
-		panic(err)
-	}
-
-	for _, word := range words {
-		fmt.Println(word)
-	}
+	fmt.Println(Wrapper(934))
 }
 
-func scanWords(path string) ([]string, error) {
-	file, err := os.Open(path)
-	if err != nil {
-		return nil, err
+func IntToBinary(n int) (output []int) {
+	// create array to store binary numbers
+	var binary []int
+
+	// counter for array
+	for n > 0 {
+		// store remainder in array
+		binary = append(binary, n%2)
+		n = n / 2
 	}
 
-	defer file.Close()
-
-	scanner := bufio.NewScanner(file)
-	scanner.Split(bufio.ScanWords)
-	var words []string
-
-	for scanner.Scan() {
-		words = append(words, scanner.Text())
+	// print array in reverse order
+	for j := len(binary) - 1; j >= 0; j-- {
+		output = append(output, binary[j])
 	}
 
-	return words, nil
+	return output
+}
+
+func SliceToString(numbers []int) (out string) {
+	string := make([]string, len(numbers))
+	for i, v := range numbers {
+		string[i] = strconv.Itoa(v)
+	}
+	return strings.Join(string, "")
+}
+
+func Wrapper(num int) (out string) {
+	slice := IntToBinary(num)
+	out = SliceToString(slice)
+	return
 }
