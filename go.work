@@ -1,6 +1,6 @@
 go 1.19
 
 use (
-	./exercise-3-cyoa
+	./ex3-cyoa
 	./experiments/testing
 )

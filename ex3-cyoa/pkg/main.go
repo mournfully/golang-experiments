@@ -23,7 +23,7 @@ type Chapter struct {
 type StoryFormat map[string]Chapter
 
 func main() {
-	filePath := flag.String("file", "./story.json", "path to the input json file which would be used as the story")
+	filePath := flag.String("file", "../assets/story.json", "path to the input json file which would be used as the story")
 	flag.Parse()
 
 	content, err := ReadJsonFile(*filePath)
