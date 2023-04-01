@@ -2,5 +2,7 @@ go 1.19
 
 use (
 	./ex3-cyoa
+	./ex4-link-parser
+	./ex5-sitemap
 	./experiments/testing
 )
